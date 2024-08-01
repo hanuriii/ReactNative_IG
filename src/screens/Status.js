@@ -1,9 +1,12 @@
-import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Animated } from 'react-native';
+import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Animated, Platform } from 'react-native';
 import React, { useRef, useEffect } from 'react';
 import Ionic from 'react-native-vector-icons/Ionicons';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 const Status = ({ route, navigation }) => {
   const { name, image } = route.params;
+
+  const statusBarHeight = getStatusBarHeight();
 
   const progress = useRef(new Animated.Value(0)).current;
   const progressAnimation = progress.interpolate({
@@ -41,8 +44,9 @@ const Status = ({ route, navigation }) => {
       <StatusBar backgroundColor="black" barStyle="light-content" />
       <View //상태바 만들기
         style={{
+          marginTop: Platform.OS === 'ios' ? statusBarHeight : 0,
           height: 3,
-          width: '95%',
+          width: '100%', //끝까지 오도록 수정
           borderWidth: 1,
           backgroundColor: 'gray',
           position: 'absolute',
@@ -59,6 +63,7 @@ const Status = ({ route, navigation }) => {
       </View>
       <View
         style={{
+          marginTop: Platform.OS === 'ios' ? statusBarHeight : 0,
           padding: 15,
           flexDirection: 'row',
           alignItems: 'center',
