@@ -1,6 +1,6 @@
 ---
-name: "[FEATURE] 스토리 기능"
-about: About Instargram Story
+name: "[FEATURE] Instargram 기능"
+about: About Instargram
 title: ''
 labels: ''
 assignees: ''
@@ -8,6 +8,4 @@ assignees: ''
 ---
 
 ## TODO
-- [] Home.js
-- [] Stories.js
-- [] Status.js
+
