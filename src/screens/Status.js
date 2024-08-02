@@ -1,10 +1,19 @@
-import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Animated, Platform } from 'react-native';
-import React, { useRef, useEffect } from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StatusBar,
+  Image,
+  TouchableOpacity,
+  Animated,
+  Platform,
+} from 'react-native';
+import React, {useRef, useEffect} from 'react';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
+import {getStatusBarHeight} from 'react-native-status-bar-height';
 
-const Status = ({ route, navigation }) => {
-  const { name, image } = route.params;
+const Status = ({route, navigation}) => {
+  const {name, image} = route.params;
 
   const statusBarHeight = getStatusBarHeight();
 
@@ -12,7 +21,7 @@ const Status = ({ route, navigation }) => {
   const progressAnimation = progress.interpolate({
     inputRange: [0, 5], //0~5초 동안
     outputRange: ['0%', '100%'], //0% -> 100%로 바뀜
-  })
+  });
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -20,18 +29,17 @@ const Status = ({ route, navigation }) => {
     }, 5000);
 
     return () => {
-      clearTimeout(timer)
-    }
-  }, [])
-  
+      clearTimeout(timer);
+    };
+  }, []);
+
   useEffect(() => {
     Animated.timing(progress, {
       toValue: 5,
       duration: 5000, //5초 동안
       useNativeDriver: false,
     }).start();
-  }, [])
-  
+  }, []);
 
   return (
     <SafeAreaView
@@ -39,8 +47,7 @@ const Status = ({ route, navigation }) => {
         backgroundColor: 'black',
         height: '100%', //전체 블랙으로 채우기
         justifyContent: 'center',
-      }}
-    >
+      }}>
       <StatusBar backgroundColor="black" barStyle="light-content" />
       <View //상태바 만들기
         style={{
@@ -51,8 +58,7 @@ const Status = ({ route, navigation }) => {
           backgroundColor: 'gray',
           position: 'absolute',
           top: 18,
-        }}
-      >
+        }}>
         <Animated.View
           style={{
             height: '100%',
@@ -71,16 +77,14 @@ const Status = ({ route, navigation }) => {
           top: 12,
           left: 0,
           width: '90%',
-        }}
-      >
+        }}>
         <View //프로필 이미지 부분
           style={{
             width: 30,
             height: 30,
             justifyContent: 'center',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <Image
             source={image}
             style={{
@@ -97,13 +101,15 @@ const Status = ({ route, navigation }) => {
             justifyContent: 'space-between',
             flexDirection: 'row',
             width: '100%',
-          }}
-        >
-          <Text style={{ color: 'white', fontSize: 15, paddingLeft: 10 }}>
+          }}>
+          <Text style={{color: 'white', fontSize: 15, paddingLeft: 10}}>
             {name}
           </Text>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionic name="close" style={{ color: 'white', fontSize: 15, opacity: 0.6 }} />
+            <Ionic
+              name="close"
+              style={{color: 'white', fontSize: 15, opacity: 0.6}}
+            />
           </TouchableOpacity>
         </View>
       </View>
